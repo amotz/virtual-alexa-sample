@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "description": "Coffee shop Alexa Skill for e2e testing",
+  "main": "index.js",
+  "dependencies": {
+    "ask-sdk": "^2.5.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,196 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "喫茶店",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "OrderIntent",
+                    "slots": [
+                        {
+                            "name": "drink",
+                            "type": "Drink",
+                            "samples": [
+                                "{drink}"
+                            ]
+                        },
+                        {
+                            "name": "amount",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{amount}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{drink}",
+                        "{drink} お願いします",
+                        "{drink} を {amount} 個ください",
+                        "{drink} を {amount}",
+                        "オーダー",
+                        "注文をお願いします"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "Drink",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "クリームソーダ"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "コーラ"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "水"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ココア"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "紅茶"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "コーヒー"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "OrderIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "drink",
+                            "type": "Drink",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1410164654225.923409109574"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isNotInSet",
+                                    "prompt": "Slot.Validation.1410164654225.923409109574.234254136290",
+                                    "values": [
+                                        "クリームソーダ"
+                                    ]
+                                },
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.798652510671.792419756936.43314887853"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "amount",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1410164654225.245831103035"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThanOrEqualTo",
+                                    "prompt": "Slot.Validation.204705012182.856565758777.521580440836",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1410164654225.923409109574",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "ご注文の商品はいかがいたしましょう？"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1410164654225.923409109574.234254136290",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "ごめんなさい。 {drink} は夏季限定なんです。他の商品でお願いします。"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1410164654225.245831103035",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{drink} をいくつでしょうか？"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.1410164654225",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{drink} を {amount} 個でよろしいですか？"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.204705012182.856565758777.521580440836",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "すみません。うまく聞き取れませんでした。いくつご注文ですか？"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.798652510671.792419756936.43314887853",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "ごめんなさい。うちには {drink} はないんです。他の商品でお願いします。"
+                    }
+                ]
+            }
+        ]
+    }
+}
